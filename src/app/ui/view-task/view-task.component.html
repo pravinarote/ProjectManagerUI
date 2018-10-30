@@ -1,15 +1,56 @@
+<div class="container header-left ">
+  <div class="header-left table-responsive">
+    <table class="table borderless">
+      <tr>
+        <td>Project</td>
+        <td><input type="text" [(ngModel)]="projectSearch" class="form-control"></td>
+        <td><button (click)="updateTask(taskItem.TaskId)" class="btn btn-success btn-space">Search</button></td>
+      </tr>
+    </table>
+  </div>
+  <div class="header-right table-responsive">
+    <table class="table borderless">
+      <tr>
+          <td>Sort Task By:</td>
+          <td><button (click)="updateTask(taskItem.TaskId)" class="btn btn-space">Start Date</button></td>
+          <td><button (click)="updateTask(taskItem.TaskId)" class="btn btn-space">End Date</button></td>
+          <td><button (click)="updateTask(taskItem.TaskId)" class="btn btn-space">Priority</button></td>
+          <td><button (click)="updateTask(taskItem.TaskId)" class="btn btn-space">Completed</button></td>
 
-
-
-<div class="row font-bold">
-  <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">.col-sm-4</div>
-  <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">.col-sm-4</div>
-  <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
-  <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
-  <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
-  <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
-  <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
-  <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
-  <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
-  <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
+      </tr>
+    </table>  
+  </div>
 </div>
+
+<div class="container inner-container list-group">
+  <hr/>
+  <div class="list-group-item">
+    <div class="row font-bold">
+      <div  class="col-sm-2 col-xs-2 col-md-2 col-lg-2">.col-sm-4</div>
+      <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">.col-sm-4</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">.col-sm-4</div>
+      <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">.col-sm-4</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
+    </div>
+  </div>
+
+</div>
+
+

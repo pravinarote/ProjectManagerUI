@@ -1,0 +1,24 @@
+.header-right {
+    float: right;
+  }
+
+.header-left {
+  float: left;
+}
+
+.borderless td, .borderless th {
+  border: none;
+}
+
+.font-bold {
+  font-weight: bold
+}
+
+.align-left{
+  text-align:left;
+}
+
+.inner-container{
+  float:left; 
+  clear: left;
+  } 
