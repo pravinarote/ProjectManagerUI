@@ -1,3 +1,98 @@
-<p>
-  add-user works!
-</p>
+
+<div class="container" style="text-align:left;">
+  <form [formGroup]="angularForm" novalidate>
+    <div class="row">
+      <div class="form-group col-sm-4 col-md-4 col-lg-4">
+          <label>First Name:</label>
+          <input class="form-control " [(ngModel)]="user.FirstName" formControlName="firstName" type="text">
+      </div>
+    </div>
+      <div *ngIf="angularForm.controls['firstName'].invalid && (angularForm.controls['firstName'].dirty || angularForm.controls['firstName'].touched)" class="alert alert-danger">
+          <div *ngIf="angularForm.controls['firstName'].errors.required">
+            First Name is required.
+          </div>
+      </div>
+      <div class="row">
+      <div class="form-group col-sm-4 col-md-4 col-lg-4">
+          <label>Last Name:</label>
+          <input class="form-control" [(ngModel)]="user.LastName" formControlName="lastName" type="text">
+      </div>
+    </div>
+      <div *ngIf="angularForm.controls['lastName'].invalid && (angularForm.controls['lastName'].dirty || angularForm.controls['lastName'].touched)" class="alert alert-danger">
+          <div *ngIf="angularForm.controls['lastName'].errors.required">
+            Last Name is required.
+          </div>
+      </div>
+      <div class="row">
+      <div class="form-group col-sm-4 col-md-4 col-lg-4">
+          <label>Employee ID:</label>
+          <input class="form-control" [(ngModel)]="user.EmployeeId" formControlName="employeeId" type="text">
+      </div>
+    </div>
+      <div *ngIf="angularForm.controls['employeeId'].invalid && (angularForm.controls['employeeId'].dirty || angularForm.controls['employeeId'].touched)" class="alert alert-danger">
+          <div *ngIf="angularForm.controls['employeeId'].errors.required">
+            Employee ID is required.
+          </div>
+      </div>
+
+      <button type="submit" (click)="createTask(item)"
+            [disabled]="angularForm.pristine || angularForm.invalid || error.isError" class="btn btn-success btn-space">
+            Add
+        </button>
+        <button type="reset" class="btn btn-success">Reset</button>
+
+  </form>
+</div>
+
+<div class="container ">
+  <div class="row">
+      
+  
+
+  <div class="col-lg-8 col-md-8 col-sm-8">
+      <hr style="color: blue;" />
+  <div class="header-left table-responsive ">
+      <table class="table borderless">
+        <tr>
+          <td><input type="text" [(ngModel)]="projectSearch" class="form-control" placeholder="Search..."/></td>
+          <td><button (click)="updateTask(taskItem.TaskId)" class="btn btn-success btn-space">Search</button></td>
+        </tr>
+      </table>
+    </div>
+    <div class="header-right table-responsive ">
+      <table class="table borderless">
+        <tr>
+            <td>Sort:</td>
+            <td><button (click)="updateTask(taskItem.TaskId)" class="btn btn-space">First Name</button></td>
+            <td><button (click)="updateTask(taskItem.TaskId)" class="btn btn-space">Last Name</button></td>
+            <td><button (click)="updateTask(taskItem.TaskId)" class="btn btn-space">ID</button></td>
+        </tr>
+      </table>  
+    </div>
+  </div>
+
+  <div class="container inner-container list-group user-item col-lg-8 col-md-8 col-sm-8">
+    <div class="list-group-item">
+      <div class="row">
+        <div class="col-sm-8 col-xs-8 col-md-8 col-lg-8">First Name User 1</div>
+        <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4">
+            <button (click)="updateTask(taskItem.TaskId)" class="btn btn-success btn-space btn-size">Edit</button>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 5px">
+          <div class="col-sm-8 col-xs-8 col-md-8 col-lg-8">Last Name User</div>
+          <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4">
+              <button (click)="updateTask(taskItem.TaskId)" class="btn btn-success btn-space btn-size">Delete</button>
+          </div>
+      </div>
+      <div class="row" style="margin-top: 5px">
+          <div class="col-sm-8 col-xs-8 col-md-8 col-lg-8">Email Id</div>
+          <div class="col-sm-4 col-xs-4 col-md-4 col-lg-4">
+          </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+

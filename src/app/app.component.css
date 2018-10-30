@@ -1,4 +1,7 @@
 a:hover, a:focus, a:active {
     text-decoration: underline;
-    background: #efefef;
+}
+
+.top-margin {
+    margin-top: 20px;
 }
