@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DialogService } from 'ng2-bootstrap-modal';
+import { SearchProjectComponent } from '../search-project/search-project.component';
 
 @Component({
   selector: 'app-add-task',
@@ -7,9 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddTaskComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialogService:DialogService) { }
 
   ngOnInit() {
   }
+
+  showConfirm() {
+    let disposable = this.dialogService.addDialog(SearchProjectComponent, {
+        title:'Confirm title', 
+        message:'Confirm message'})
+        .subscribe((isConfirmed)=>{
+            //We get dialog result
+            if(isConfirmed) {
+                alert('accepted');
+            }
+            else {
+                alert('declined');
+            }
+        });
+    //We can close dialog calling disposable.unsubscribe();
+    //If dialog was not closed manually close it by timeout
+    setTimeout(()=>{
+        disposable.unsubscribe();
+    },10000);
+}
 
 }
