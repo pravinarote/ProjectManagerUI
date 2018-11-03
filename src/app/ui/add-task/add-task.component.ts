@@ -16,7 +16,7 @@ export class AddTaskComponent implements OnInit {
 
   showConfirm() {
     let disposable = this.dialogService.addDialog(SearchProjectComponent, {
-        title:'Confirm title', 
+        title:'Search Project', 
         message:'Confirm message'})
         .subscribe((isConfirmed)=>{
             //We get dialog result
