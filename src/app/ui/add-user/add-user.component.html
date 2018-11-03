@@ -3,6 +3,7 @@
     <div class="form-group row">
       <label for="firstName" class="col-sm-2 col-form-label">First Name:</label>
       <div class="col-sm-6">
+        <input *ngIf="false" type="text" class="form-control" [(ngModel)]="user.UserId" formControlName="userId" >
         <input type="text" class="form-control" [(ngModel)]="user.FirstName" formControlName="firstName" placeholder="First Name">
       </div>
     </div>
@@ -40,7 +41,7 @@
       <div class="col-sm-2"></div>
     <div class="col-sm-6">
       <button type="submit" (click)="createUser(user)" class="btn btn-primary btn-space"
-      [disabled]="angularForm.pristine || angularForm.invalid || error.isError">Add</button>
+      [disabled]="angularForm.invalid">{{operation}}</button>
       <button type="reset" class="btn btn-primary">Reset</button>
     </div>
   </div>
@@ -69,24 +70,24 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sm-8">
-        <div class="list-group" style="margin-top: 10px;">
-            <div class="list-group-item">
+  <div class="row" >
+    <div class="col-sm-8" >
+        <div  class="list-group" style="margin-top: 10px;"  >
+            <div class="list-group-item" *ngFor="let user of userList">
                 <div class="row">
                     <div class="col-sm-11">
                         <div class="row">
-                            <div class="col-sm-8">First Name : Trafigura</div>
+                            <div class="col-sm-8">First Name : {{user.FirstName}}</div>
                             <div class="col-sm-3"></div>
-                            <div class="col-sm-1"><button (click)="updateTask(taskItem.TaskId)" type="submit" class="btn btn-primary btn-size">Edit</button></div>
+                            <div class="col-sm-1"><button (click)="updateUser(user)" type="submit" class="btn btn-primary btn-size">Edit</button></div>
                         </div>
                         <div class="row" style="margin-top: 5px;">
-                            <div class="col-sm-8">Last Name : Trafigura</div>
+                            <div class="col-sm-8">Last Name : {{user.LastName}}</div>
                             <div class="col-sm-3"></div>
-                            <div class="col-sm-1"><button (click)="updateTask(taskItem.TaskId)" type="submit" class="btn btn-primary btn-size">Delete</button></div>
+                            <div class="col-sm-1"><button (click)="deleteUser(user.UserId)" type="submit" class="btn btn-primary btn-size">Delete</button></div>
                         </div>
                         <div class="row" style="margin-top: 5px;">
-                            <div class="col-sm-8">Employee ID : TRAF_001</div>
+                            <div class="col-sm-8">Employee ID : {{user.EmployeeId}}</div>
                             <div class="col-sm-3"></div>
                             <div class="col-sm-1"></div>
                         </div>

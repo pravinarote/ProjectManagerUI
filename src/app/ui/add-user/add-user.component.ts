@@ -3,6 +3,7 @@ import {Router} from '@angular/router'
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { ProjectManagerServiceService } from 'src/app/services/project-manager-service.service';
+import { stringify } from '@angular/compiler/src/util';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { ProjectManagerServiceService } from 'src/app/services/project-manager-s
 export class AddUserComponent implements OnInit {
 
   user : User;
+  operation : string;
   angularForm: FormGroup;
   userList : User[] = [];
 
@@ -22,10 +24,12 @@ export class AddUserComponent implements OnInit {
    }
 
   createForm() {
+    this.operation = "Add";
     this.angularForm = this.fb.group({
       firstName: ['', Validators.required ],
       lastName : ['',Validators.required],
-      employeeId : ['',Validators.required]
+      employeeId : ['',Validators.required],
+      userId : []
     });
   }
 
@@ -38,6 +42,43 @@ export class AddUserComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.operation = "Add";
+    this.getUsers();
+  }
+
+  createUser(user : User) {
+    console.log(user.UserId);
+    if(user.UserId > 0) {
+      this.service.updateUser(user);
+    }
+    else {
+      this.service.createUser(user);
+    }
+    this.service.serviceResponseReceived.subscribe((value) => {
+      this.createForm();
+      this.getUsers();
+    });
+  }
+
+  updateUser(user : User) {
+    this.operation = "Update";
+    this.user.FirstName = user.FirstName;
+    this.user.LastName = user.LastName;
+    this.user.EmployeeId = user.EmployeeId;
+    this.user.UserId = user.UserId;
+    this.angularForm.patchValue({
+      firstName : user.FirstName,
+      lastName : user.LastName,
+      employeeId : user.EmployeeId,
+      userId : user.UserId
+    });
+  }
+
+  deleteUser(id : number) {
+    this.service.deleteUser(id);
+    this.service.serviceResponseReceived.subscribe((value) => {
+      this.getUsers();
+    });
   }
 
 }

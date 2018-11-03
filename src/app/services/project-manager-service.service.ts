@@ -5,6 +5,7 @@ import { Observable, of, Subject} from 'rxjs'
 import { map, catchError, filter, scan } from 'rxjs/operators'
 import { webSocket } from 'rxjs/webSocket';
 import { User } from '../models/user';
+import { Project } from '../models/project';
 
 const endpoint = 'http://localhost:59969/';
 const httpOptions = {
@@ -31,7 +32,26 @@ export class ProjectManagerServiceService {
     let body = JSON.stringify(task);
     console.log(body);
     let returnObject = false;
-    this.http.post(endpoint + "Users/CreateUser",
+    this.http.post(endpoint + "Users/Create",
+        body, httpOptions)
+        .subscribe(
+            data => {
+                
+                returnObject = true;
+                this.serviceResponseReceived.next(true);
+            },
+            error => {
+                console.log("POST Error", error);
+            }
+        ); 
+    return returnObject;
+  }
+
+  createProject(project : Project) {
+    let body = JSON.stringify(project);
+    console.log(body);
+    let returnObject = false;
+    this.http.post(endpoint + "Projects/Create",
         body, httpOptions)
         .subscribe(
             data => {
@@ -50,7 +70,7 @@ export class ProjectManagerServiceService {
     let body = JSON.stringify(task);
 
     let returnObject = false;
-    this.http.put(endpoint + "Users/UpdateUser",
+    this.http.put(endpoint + "Users/Update",
         body, httpOptions)
         .subscribe(
             data => {
