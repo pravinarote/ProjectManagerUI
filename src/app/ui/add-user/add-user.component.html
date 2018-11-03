@@ -1,31 +1,47 @@
 <div class="container" style="text-align:left;">
-  <form>
+  <form [formGroup]="angularForm" novalidate>
     <div class="form-group row">
       <label for="firstName" class="col-sm-2 col-form-label">First Name:</label>
       <div class="col-sm-6">
-        <input type="text" class="form-control" id="firstName" placeholder="Project">
+        <input type="text" class="form-control" [(ngModel)]="user.FirstName" formControlName="firstName" placeholder="First Name">
       </div>
+    </div>
+    <div *ngIf="angularForm.controls['firstName'].invalid && (angularForm.controls['firstName'].dirty || angularForm.controls['firstName'].touched)" class="alert alert-danger">
+        <div *ngIf="angularForm.controls['firstName'].errors.required">
+          First Name is required.
+        </div>
     </div>
 
     <div class="form-group row">
       <label for="lastName" class="col-sm-2 col-form-label">Last Name:</label>
       <div class="col-sm-6">
-        <input type="text" class="form-control" id="lastName" placeholder="Project">
+        <input type="text" [(ngModel)]="user.LastName" class="form-control" formControlName="lastName" placeholder="Last Name">
       </div>
+    </div>
+    <div *ngIf="angularForm.controls['lastName'].invalid && (angularForm.controls['lastName'].dirty || angularForm.controls['lastName'].touched)" class="alert alert-danger">
+        <div *ngIf="angularForm.controls['lastName'].errors.required">
+          Last Name is required.
+        </div>
     </div>
 
     <div class="form-group row">
       <label for="employeeId" class="col-sm-2 col-form-label">Employee ID:</label>
       <div class="col-sm-6">
-        <input type="text" class="form-control" id="employeeId" placeholder="Project">
+        <input type="text" [(ngModel)]="user.EmployeeId" class="form-control" formControlName="employeeId" placeholder="Employee ID">
       </div>
+    </div>
+    <div *ngIf="angularForm.controls['employeeId'].invalid && (angularForm.controls['employeeId'].dirty || angularForm.controls['employeeId'].touched)" class="alert alert-danger">
+        <div *ngIf="angularForm.controls['employeeId'].errors.required">
+          Employee ID is required.
+        </div>
     </div>
 
     <div class="form-group row">
       <div class="col-sm-2"></div>
     <div class="col-sm-6">
-      <button type="submit" class="btn btn-primary btn-space">Add</button>
-      <button type="submit" class="btn btn-primary">Reset</button>
+      <button type="submit" (click)="createUser(user)" class="btn btn-primary btn-space"
+      [disabled]="angularForm.pristine || angularForm.invalid || error.isError">Add</button>
+      <button type="reset" class="btn btn-primary">Reset</button>
     </div>
   </div>
 

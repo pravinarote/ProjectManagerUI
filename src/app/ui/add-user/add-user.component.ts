@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router'
+import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { User } from 'src/app/models/user';
+
 
 @Component({
   selector: 'app-add-user',
@@ -7,7 +11,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddUserComponent implements OnInit {
 
-  constructor() { }
+  user : User;
+  angularForm: FormGroup;
+
+  constructor(private _router: Router, private fb: FormBuilder) {
+    this.user = new User();
+    this.createForm();
+   }
+
+  createForm() {
+    this.angularForm = this.fb.group({
+      firstName: ['', Validators.required ],
+      lastName : ['',Validators.required],
+      employeeId : ['',Validators.required]
+    });
+  }
 
   ngOnInit() {
   }
