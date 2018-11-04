@@ -38,10 +38,10 @@
     <div class="form-group row">
         <label for="manager" class="col-sm-2 col-form-label">Manager</label>
         <div class="col-sm-5">
-          <input type="text" [(ngModel)]="project.Manager" class="form-control" formControlName="manager" >
+          <input type="text" [(ngModel)]="project.Manager"  class="form-control" formControlName="manager" >
         </div>
         <div class="col-sm-2">
-            <button type="submit" class="btn btn-primary">Search</button>
+            <button type="submit" class="btn btn-primary" (click)="showPopup()">Search</button>
         </div>
     </div>
 

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import { ProjectManagerServiceService } from 'src/app/services/project-manager-service.service';
 import { Project } from 'src/app/models/project';
+import { DialogService } from 'ng2-bootstrap-modal';
+import { SearchProjectComponent } from '../search-project/search-project.component';
+import { Popup } from 'src/app/models/popup';
 
 @Component({
   selector: 'app-add-project',
@@ -25,7 +28,7 @@ export class AddProjectComponent implements OnInit {
   operation : string;
   angularForm: FormGroup;
   projectList : Project[] = [];
-  constructor(private service : ProjectManagerServiceService, private fb: FormBuilder) {
+  constructor(private service : ProjectManagerServiceService, private fb: FormBuilder, private dialogService:DialogService) {
     this.createForm();
    }
 
@@ -130,5 +133,45 @@ export class AddProjectComponent implements OnInit {
     this.operation = "Add";
     this.getProjects();
   }
+  
+  popupModel :  Popup[];
+  showPopup() {
+
+    console.log('inside popup');
+
+    var users = this.service.getUsers();
+    this.popupModel = [];
+    users.toPromise().then(users=>
+      {
+        users.forEach(x=> {
+          var model = new Popup();
+          model.Id = x.UserId;
+          model.Name = x.FirstName + ' ' + x.LastName;
+          this.popupModel.push(model);
+        });
+
+        let disposable = this.dialogService.addDialog(SearchProjectComponent, {
+          title:'Search Project', 
+          items : this.popupModel,
+          message:'Confirm message'})
+          .subscribe((row)=>{
+              //We get dialog result
+              if(row!=undefined) {
+                  alert('Row selected');
+              }
+              else {
+                  alert('No selection');
+              }
+          });
+      //We can close dialog calling disposable.unsubscribe();
+    //If dialog was not closed manually close it by timeout
+    setTimeout(()=>{
+      disposable.unsubscribe();
+    },10000);
+
+      } );
+
+    
+}
 
 }
