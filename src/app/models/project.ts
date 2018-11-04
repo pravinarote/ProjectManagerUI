@@ -6,4 +6,7 @@ export class Project {
     Priority : number;
     ManagerName : string;
     ManagerId : number;
+    NoOfTasks : number;
+    NoOfTasksCompleted : number;
+    IsDatesEnabled : boolean; 
 }

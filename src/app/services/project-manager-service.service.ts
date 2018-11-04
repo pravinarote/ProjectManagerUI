@@ -28,6 +28,10 @@ export class ProjectManagerServiceService {
     return this.http.get<User[]>(endpoint + 'Users/GetAll');
   }
 
+  getProjects(): Observable<Project[]>  {
+    return this.http.get<Project[]>(endpoint + 'Projects/GetAll');
+  }
+
   createUser(task : User) {
     let body = JSON.stringify(task);
     console.log(body);
@@ -71,6 +75,25 @@ export class ProjectManagerServiceService {
 
     let returnObject = false;
     this.http.put(endpoint + "Users/Update",
+        body, httpOptions)
+        .subscribe(
+            data => {
+                console.log("PUT Request is successful ", data);
+                returnObject = true;
+                this.serviceResponseReceived.next(true);
+            },
+            error => {
+                console.log("Error", error);
+            }
+        ); 
+    return returnObject;
+  }
+
+  updateProject(task : Project)  {
+    let body = JSON.stringify(task);
+
+    let returnObject = false;
+    this.http.put(endpoint + "Projects/Update",
         body, httpOptions)
         .subscribe(
             data => {

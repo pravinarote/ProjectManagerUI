@@ -3,8 +3,6 @@ import {Router} from '@angular/router'
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { ProjectManagerServiceService } from 'src/app/services/project-manager-service.service';
-import { stringify } from '@angular/compiler/src/util';
-
 
 @Component({
   selector: 'app-add-user',
@@ -25,6 +23,7 @@ export class AddUserComponent implements OnInit {
 
   createForm() {
     this.operation = "Add";
+    this.user = new User();
     this.angularForm = this.fb.group({
       firstName: ['', Validators.required ],
       lastName : ['',Validators.required],
