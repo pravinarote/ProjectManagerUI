@@ -114,19 +114,23 @@ export class AddProjectComponent implements OnInit {
 
   updateProject(project : Project) {
     this.operation = "Update";
-    this.project.ProjectId = project.ProjectId;
-    this.project.ProjectName = project.ProjectName;
-    this.project.StartDate = project.StartDate;
-    this.project.EndDate = project.EndDate;
-    this.project.ManagerId = project.ManagerId;
-    this.project.ManagerName = project.ManagerName;
-    this.project.Priority = project.Priority;
+    this.service.getUserById(project.ManagerId).toPromise().then(x=>{
+      this.project.ProjectId = project.ProjectId;
+      this.project.ProjectName = project.ProjectName;
+      this.project.StartDate = project.StartDate;
+      this.project.EndDate = project.EndDate;
+      this.project.ManagerId = x.UserId;
+      this.project.ManagerName = x.FirstName + ' ' + x.LastName;
+      this.project.Priority = project.Priority;
+  
+      if(project.StartDate!=undefined && project.EndDate !=undefined) {
+        this.angularForm.controls['enableDates'].setValue(true);
+        this.angularForm.controls['endDate'].enable() ;
+        this.angularForm.controls['startDate'].enable() ;
+      }
+    });
 
-    if(project.StartDate!=undefined && project.EndDate !=undefined) {
-      this.angularForm.controls['enableDates'].setValue(true);
-      this.angularForm.controls['endDate'].enable() ;
-      this.angularForm.controls['startDate'].enable() ;
-    }
+    
   }
 
   ngOnInit() {
@@ -157,11 +161,11 @@ export class AddProjectComponent implements OnInit {
           .subscribe((row)=>{
               //We get dialog result
               if(row!=undefined) {
-                  alert('Row selected');
+                  // alert('Row selected');
+                  this.project.ManagerId = row.Id;
+                  this.project.ManagerName = row.Name;
               }
-              else {
-                  alert('No selection');
-              }
+              
           });
       //We can close dialog calling disposable.unsubscribe();
     //If dialog was not closed manually close it by timeout
