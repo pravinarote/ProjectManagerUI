@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogService } from 'ng2-bootstrap-modal';
-import { SearchComponent } from '../search-project/search.component';
+import { SearchComponent } from '../search/search.component';
 
 @Component({
   selector: 'app-add-task',

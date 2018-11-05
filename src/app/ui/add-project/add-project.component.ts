@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import { ProjectManagerServiceService } from 'src/app/services/project-manager-service.service';
 import { Project } from 'src/app/models/project';
 import { DialogService } from 'ng2-bootstrap-modal';
-import { SearchComponent } from '../search-project/search.component';
+import { SearchComponent } from '../search/search.component';
 import { Popup } from 'src/app/models/popup';
 
 @Component({

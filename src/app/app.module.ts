@@ -12,7 +12,7 @@ import { EditTaskComponent } from './ui/edit-task/edit-task.component';
 import { AddProjectComponent } from './ui/add-project/add-project.component';
 import { AddUserComponent } from './ui/add-user/add-user.component';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
-import { SearchComponent } from './ui/search-project/search.component';
+import { SearchComponent } from './ui/search/search.component';
 
 
 const appRoutes:Routes=[
