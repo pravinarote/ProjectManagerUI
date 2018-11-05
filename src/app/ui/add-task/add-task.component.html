@@ -1,19 +1,29 @@
 <div class="container" style="text-align:left;">
-  <form>
+  <form [formGroup]="angularForm" novalidate>
     <div class="form-group row">
-      <label for="manager" class="col-sm-2 col-form-label">Project</label>
+      <label for="projectName" class="col-sm-2 col-form-label">Project</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control" id="manager" placeholder="Manager">
+        <input type="text" class="form-control" [(ngModel)]="task.ProjectName" formControlName="projectName" placeholder="Project">
       </div>
       <div class="col-sm-2">
           <button type="submit" class="btn btn-primary" (click)=showConfirm()>Search</button>
       </div>
     </div>
+    <div *ngIf="angularForm.controls['projectName'].invalid && (angularForm.controls['projectName'].dirty || angularForm.controls['projectName'].touched)" class="alert alert-danger">
+      <div *ngIf="angularForm.controls['projectName'].errors.required">
+        Project Name is required.
+      </div>
+    </div>
 
     <div class="form-group row">
-      <label for="project" class="col-sm-2 col-form-label">Project</label>
+      <label for="taskName" class="col-sm-2 col-form-label">Task</label>
       <div class="col-sm-5">
-        <input type="text" class="form-control" id="project" placeholder="Project">
+        <input type="text" class="form-control" [(ngModel)]="task.TaskName" formControlName="taskName" placeholder="Task">
+      </div>
+    </div>
+    <div *ngIf="angularForm.controls['taskName'].invalid && (angularForm.controls['taskName'].dirty || angularForm.controls['taskName'].touched)" class="alert alert-danger">
+      <div *ngIf="angularForm.controls['taskName'].errors.required">
+        Task Name is required.
       </div>
     </div>
 
@@ -32,14 +42,14 @@
     <div class="form-group row">
       <label for="priority" class="col-sm-2 col-form-label">Priority</label>
       <div class="col-sm-5">
-        <input type="range" class="form-control" id="priority" placeholder="Project">
+        <input type="range" class="form-control" [(ngModel)]="task.Priority" formControlName="priority" placeholder="Project">
       </div>
     </div>
 
     <div class="form-group row">
-      <label for="manager" class="col-sm-2 col-form-label">Parent Task</label>
+      <label for="parentTask" class="col-sm-2 col-form-label">Parent Task</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control" id="manager" placeholder="Manager">
+        <input type="text" class="form-control" [(ngModel)]="task.ParentTaskName" formControlName="parentTask" placeholder="Parent Task">
       </div>
       <div class="col-sm-2">
           <button type="submit" class="btn btn-primary">Search</button>
@@ -49,21 +59,36 @@
     <div class="form-group row">
       <label for="manager" class="col-sm-2 col-form-label">Start Date</label>
       <div class="col-sm-2">
-        <input type="date" class="form-control" id="manager" placeholder="Start Date">
+        <input type="date" [(ngModel)]="task.StartDate" class="form-control" formControlName="startDate" >
       </div>
       <label for="manager" class="col-sm-1 col-form-label">End Date</label>
       <div class="col-sm-2">
-        <input type="date" class="form-control" id="manager" placeholder="Start Date">
+        <input type="date" [(ngModel)]="task.EndDate" class="form-control" formControlName="endDate" >
+      </div>
+    </div>
+    <div *ngIf="angularForm.controls['startDate'].invalid && (angularForm.controls['startDate'].dirty || angularForm.controls['startDate'].touched)" class="alert alert-danger">
+      <div *ngIf="angularForm.controls['startDate'].errors.required">
+        Start Date is required.
+      </div>
+    </div>
+    <div *ngIf="angularForm.controls['endDate'].invalid && (angularForm.controls['endDate'].dirty || angularForm.controls['endDate'].touched)" class="alert alert-danger">
+      <div *ngIf="angularForm.controls['endDate'].errors.required">
+        End Date is required.
       </div>
     </div>
 
     <div class="form-group row">
-      <label for="manager" class="col-sm-2 col-form-label">User</label>
+      <label for="userName" class="col-sm-2 col-form-label">User</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control" id="manager" placeholder="Manager">
+        <input type="text" class="form-control" [(ngModel)]="task.UserName" formControlName="userName" placeholder="User">
       </div>
       <div class="col-sm-2">
           <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </div>
+    <div *ngIf="angularForm.controls['userName'].invalid && (angularForm.controls['userName'].dirty || angularForm.controls['userName'].touched)" class="alert alert-danger">
+      <div *ngIf="angularForm.controls['userName'].errors.required">
+        User Name is required.
       </div>
     </div>
 
