@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import { ProjectManagerServiceService } from 'src/app/services/project-manager-service.service';
 import { Project } from 'src/app/models/project';
 import { DialogService } from 'ng2-bootstrap-modal';
-import { SearchProjectComponent } from '../search-project/search-project.component';
+import { SearchComponent } from '../search-project/search.component';
 import { Popup } from 'src/app/models/popup';
 
 @Component({
@@ -76,6 +76,8 @@ export class AddProjectComponent implements OnInit {
     if(enable) {
       this.angularForm.controls['endDate'].enable() ;
       this.angularForm.controls['startDate'].enable() ;
+      this.angularForm.controls['startDate'].setValidators(Validators.required);
+      this.angularForm.controls['endDate'].setValidators(Validators.required);
       var startdate = new Date();
       var endDate = new Date(startdate.getFullYear(),startdate.getMonth(),startdate.getDate() + 1);
       this.project.StartDate = startdate;
@@ -84,6 +86,8 @@ export class AddProjectComponent implements OnInit {
     else {
       this.angularForm.controls['endDate'].disable() ;
       this.angularForm.controls['startDate'].disable() ;
+      this.angularForm.controls['startDate'].setValidators(null);
+      this.angularForm.controls['endDate'].setValidators(null);
       this.project.StartDate  =null;
       this.project.EndDate = null;
     }
@@ -154,7 +158,7 @@ export class AddProjectComponent implements OnInit {
           this.popupModel.push(model);
         });
 
-        let disposable = this.dialogService.addDialog(SearchProjectComponent, {
+        let disposable = this.dialogService.addDialog(SearchComponent, {
           title:'Search Project', 
           items : this.popupModel,
           message:'Confirm message'})
@@ -167,11 +171,11 @@ export class AddProjectComponent implements OnInit {
               }
               
           });
-      //We can close dialog calling disposable.unsubscribe();
-    //If dialog was not closed manually close it by timeout
-    setTimeout(()=>{
-      disposable.unsubscribe();
-    },10000);
+        //We can close dialog calling disposable.unsubscribe();
+        //If dialog was not closed manually close it by timeout
+        setTimeout(()=>{
+          disposable.unsubscribe();
+        },10000);
 
       } );
 

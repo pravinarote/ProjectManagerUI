@@ -12,7 +12,7 @@ import { EditTaskComponent } from './ui/edit-task/edit-task.component';
 import { AddProjectComponent } from './ui/add-project/add-project.component';
 import { AddUserComponent } from './ui/add-user/add-user.component';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
-import { SearchProjectComponent } from './ui/search-project/search-project.component';
+import { SearchComponent } from './ui/search-project/search.component';
 
 
 const appRoutes:Routes=[
@@ -31,7 +31,7 @@ const appRoutes:Routes=[
     EditTaskComponent,
     AddProjectComponent,
     AddUserComponent,
-    SearchProjectComponent
+    SearchComponent
   ],
   imports: [
     BrowserModule,FormsModule, RouterModule.forRoot(appRoutes),
@@ -39,7 +39,7 @@ const appRoutes:Routes=[
   ],
   //Don't forget to add the component to entryComponents section
   entryComponents: [
-    SearchProjectComponent
+    SearchComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

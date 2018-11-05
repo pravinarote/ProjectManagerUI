@@ -10,10 +10,10 @@ export interface ConfirmModel {
 
 @Component({
   selector: 'app-search-project',
-  templateUrl: './search-project.component.html',
-  styleUrls: ['./search-project.component.css']
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.css']
 })
-export class SearchProjectComponent extends DialogComponent<ConfirmModel, Popup> implements ConfirmModel {
+export class SearchComponent extends DialogComponent<ConfirmModel, Popup> implements ConfirmModel {
   title: string;
   message: string;
   active : string;
