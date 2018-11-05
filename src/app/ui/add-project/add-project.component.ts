@@ -180,6 +180,38 @@ export class AddProjectComponent implements OnInit {
       } );
 
     
-}
+  }
+
+  private getTime(date?: Date) {
+    return date != null && date!=undefined ? new Date(date).getTime() : 0;
+  }
+
+  onSortStartDate() {
+    if(this.projectList!=undefined && this.projectList.length > 0) {
+      this.projectList.sort((x1,x2)=> {
+        return this.getTime(x1.StartDate) - this.getTime(x2.StartDate)
+      });
+    }
+  }
+
+  onSortEndDate() {
+    if(this.projectList!=undefined && this.projectList.length > 0) {
+      this.projectList.sort((x1,x2)=> {
+        return this.getTime(x1.EndDate) - this.getTime(x2.EndDate)
+      });
+    }
+  }
+
+  onSortPriority() {
+    if(this.projectList!=undefined && this.projectList.length > 0) {
+      this.projectList.sort((x1,x2)=> {
+        return x1.Priority - x2.Priority;
+      });
+    }
+  }
+
+  onSortCompleted() {
+
+  }
 
 }

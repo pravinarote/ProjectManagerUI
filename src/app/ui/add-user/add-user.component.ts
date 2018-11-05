@@ -40,6 +40,45 @@ export class AddUserComponent implements OnInit {
     });
   }
 
+  onSortFirstName() {
+    if(this.userList!=undefined && this.userList.length > 0) {
+
+      this.userList.sort((x1,x2)=> {
+        const name1 = x1.FirstName.toLowerCase();
+        const name2 = x2.FirstName.toLowerCase();
+        if (name1 > name2) { return 1; }
+        if (name1 < name2) { return -1; }
+        return 0;
+      });
+    }
+  }
+
+  onSortLastName() {
+    if(this.userList!=undefined && this.userList.length > 0) {
+
+      this.userList.sort((x1,x2)=> {
+        const name1 = x1.LastName.toLowerCase();
+        const name2 = x2.LastName.toLowerCase();
+        if (name1 > name2) { return 1; }
+        if (name1 < name2) { return -1; }
+        return 0;
+      });
+    }
+  }
+
+  onSortId() {
+    if(this.userList!=undefined && this.userList.length > 0) {
+
+      this.userList.sort((x1,x2)=> {
+        const name1 = x1.EmployeeId.toLowerCase();
+        const name2 = x2.EmployeeId.toLowerCase();
+        if (name1 > name2) { return 1; }
+        if (name1 < name2) { return -1; }
+        return 0;
+      });
+    }
+  }
+
   ngOnInit() {
     this.operation = "Add";
     this.getUsers();

@@ -86,10 +86,10 @@
   <div class="row" style="margin-top: 10px;">
     <div class="col-sm-8">
       <div class="col-sm-3 font-bold">Sort By:</div>
-      <button type="submit" class="btn btn-space">Start Date</button>
-      <button type="submit" class="btn btn-space">End Date</button>
-      <button type="submit" class="btn btn-space">Priority</button>
-      <button type="submit" class="btn btn-space">Completed</button>
+      <button type="submit" class="btn btn-space" (click)="onSortStartDate()">Start Date</button>
+      <button type="submit" class="btn btn-space" (click)="onSortEndDate()">End Date</button>
+      <button type="submit" class="btn btn-space" (click)="onSortPriority()">Priority</button>
+      <button type="submit" class="btn btn-space" (click)="onSortCompleted()">Completed</button>
     </div>
   </div>
 
