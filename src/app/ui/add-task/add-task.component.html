@@ -7,7 +7,7 @@
         <input type="text" class="form-control" [(ngModel)]="task.ProjectName" formControlName="projectName" placeholder="Project">
       </div>
       <div class="col-sm-2">
-          <button type="submit" class="btn btn-primary" [disabled]="angularForm.controls['parentTaskCheckbox'].value" (click)=showConfirm()>Search</button>
+          <button type="submit" class="btn btn-primary" [disabled]="angularForm.controls['parentTaskCheckbox'].value" (click)=showProjects()>Search</button>
       </div>
     </div>
     <div *ngIf="angularForm.controls['projectName'].invalid && (angularForm.controls['projectName'].dirty || angularForm.controls['projectName'].touched)" class="alert alert-danger">
@@ -53,18 +53,20 @@
         <input type="text" class="form-control" [(ngModel)]="task.ParentTaskName" formControlName="parentTask" placeholder="Parent Task">
       </div>
       <div class="col-sm-2">
-          <button type="submit" class="btn btn-primary" [disabled]="angularForm.controls['parentTaskCheckbox'].value">Search</button>
+          <button type="submit" class="btn btn-primary" [disabled]="angularForm.controls['parentTaskCheckbox'].value" (click)=showParentTasks()>Search</button>
       </div>
     </div>
 
     <div class="form-group row">
       <label for="manager" class="col-sm-2 col-form-label">Start Date</label>
       <div class="col-sm-2">
-        <input type="date" [(ngModel)]="task.StartDate" class="form-control" formControlName="startDate" >
+        <input type="date" [ngModel]="task.StartDate | date:'yyyy-MM-dd'"  (ngModelChange)="task.StartDate = $event"
+        [value]="task.StartDate | date:'yyyy-MM-dd'"  class="form-control" formControlName="startDate">
       </div>
       <label for="manager" class="col-sm-1 col-form-label">End Date</label>
       <div class="col-sm-2">
-        <input type="date" [(ngModel)]="task.EndDate" class="form-control" formControlName="endDate" >
+        <input type="date" [ngModel]="task.EndDate | date:'yyyy-MM-dd'"  (ngModelChange)="task.EndDate = $event" (blur)="compareTwoDates()"
+        [value]="task.EndDate | date:'yyyy-MM-dd'"  class="form-control" formControlName="endDate" class="form-control" formControlName="endDate" >
       </div>
     </div>
     <div *ngIf="angularForm.controls['startDate'].invalid && (angularForm.controls['startDate'].dirty || angularForm.controls['startDate'].touched)" class="alert alert-danger">
@@ -84,7 +86,7 @@
         <input type="text" class="form-control" [(ngModel)]="task.UserName" formControlName="userName" placeholder="User">
       </div>
       <div class="col-sm-2">
-          <button type="submit" [disabled]="angularForm.controls['parentTaskCheckbox'].value" class="btn btn-primary">Search</button>
+          <button type="submit" [disabled]="angularForm.controls['parentTaskCheckbox'].value" class="btn btn-primary" (click)=showUsers()>Search</button>
       </div>
     </div>
     <div *ngIf="angularForm.controls['userName'].invalid && (angularForm.controls['userName'].dirty || angularForm.controls['userName'].touched)" class="alert alert-danger">

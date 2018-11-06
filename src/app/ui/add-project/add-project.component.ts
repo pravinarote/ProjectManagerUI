@@ -159,7 +159,7 @@ export class AddProjectComponent implements OnInit {
         });
 
         let disposable = this.dialogService.addDialog(SearchComponent, {
-          title:'Search Project', 
+          title:'Search User', 
           items : this.popupModel,
           message:'Confirm message'})
           .subscribe((row)=>{
@@ -175,7 +175,7 @@ export class AddProjectComponent implements OnInit {
         //If dialog was not closed manually close it by timeout
         setTimeout(()=>{
           disposable.unsubscribe();
-        },10000);
+        },100000);
 
       } );
 

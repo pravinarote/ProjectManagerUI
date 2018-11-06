@@ -6,6 +6,7 @@ import { map, catchError, filter, scan } from 'rxjs/operators'
 import { webSocket } from 'rxjs/webSocket';
 import { User } from '../models/user';
 import { Project } from '../models/project';
+import { Task } from '../models/task';
 
 const endpoint = 'http://localhost:59969/';
 const httpOptions = {
@@ -30,6 +31,10 @@ export class ProjectManagerServiceService {
 
   getProjects(): Observable<Project[]>  {
     return this.http.get<Project[]>(endpoint + 'Projects/GetAll');
+  }
+
+  getParentTasks(): Observable<Task[]>  {
+    return this.http.get<Task[]>(endpoint + 'ParentTasks/GetAll');
   }
 
   createUser(task : User) {
