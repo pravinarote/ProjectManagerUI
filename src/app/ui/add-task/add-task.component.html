@@ -7,7 +7,7 @@
         <input type="text" class="form-control" [(ngModel)]="task.ProjectName" formControlName="projectName" placeholder="Project">
       </div>
       <div class="col-sm-2">
-          <button type="submit" class="btn btn-primary" (click)=showConfirm()>Search</button>
+          <button type="submit" class="btn btn-primary" [disabled]="angularForm.controls['parentTaskCheckbox'].value" (click)=showConfirm()>Search</button>
       </div>
     </div>
     <div *ngIf="angularForm.controls['projectName'].invalid && (angularForm.controls['projectName'].dirty || angularForm.controls['projectName'].touched)" class="alert alert-danger">
@@ -32,8 +32,8 @@
       <div class="col-sm-2"></div>
       <div class="col-sm-4">
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="gridCheck1">
-          <label class="form-check-label" style="font-weight: normal" for="gridCheck1">
+          <input class="form-check-input" type="checkbox" formControlName="parentTaskCheckbox" (change)="parentTaskChecked(angularForm.controls['parentTaskCheckbox'].value)">
+          <label class="form-check-label" style="font-weight: normal" for="parentTaskCheckbox">
             Parent Task
           </label>
         </div>
@@ -53,7 +53,7 @@
         <input type="text" class="form-control" [(ngModel)]="task.ParentTaskName" formControlName="parentTask" placeholder="Parent Task">
       </div>
       <div class="col-sm-2">
-          <button type="submit" class="btn btn-primary">Search</button>
+          <button type="submit" class="btn btn-primary" [disabled]="angularForm.controls['parentTaskCheckbox'].value">Search</button>
       </div>
     </div>
 
@@ -84,7 +84,7 @@
         <input type="text" class="form-control" [(ngModel)]="task.UserName" formControlName="userName" placeholder="User">
       </div>
       <div class="col-sm-2">
-          <button type="submit" class="btn btn-primary">Search</button>
+          <button type="submit" [disabled]="angularForm.controls['parentTaskCheckbox'].value" class="btn btn-primary">Search</button>
       </div>
     </div>
     <div *ngIf="angularForm.controls['userName'].invalid && (angularForm.controls['userName'].dirty || angularForm.controls['userName'].touched)" class="alert alert-danger">
