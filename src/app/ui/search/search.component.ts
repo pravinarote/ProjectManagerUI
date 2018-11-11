@@ -20,6 +20,7 @@ export class SearchComponent extends DialogComponent<ConfirmModel, Popup> implem
 
   items : Popup[];
   selectedRow : Popup;
+  filterString : string;
 
   constructor(dialogService: DialogService) {
     super(dialogService);

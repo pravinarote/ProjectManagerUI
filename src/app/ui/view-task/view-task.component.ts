@@ -3,6 +3,8 @@ import { ProjectManagerServiceService } from 'src/app/services/project-manager-s
 import { DialogService } from 'ng2-bootstrap-modal';
 import { Task } from 'src/app/models/task';
 import { Router } from '@angular/router';
+import { Popup } from 'src/app/models/popup';
+import { SearchComponent } from 'src/app/ui/search/search.component';
 
 @Component({
   selector: 'app-view-task',
@@ -11,6 +13,9 @@ import { Router } from '@angular/router';
 })
 export class ViewTaskComponent implements OnInit {
   taskList : Task[];
+  taskOriginalList : Task[];
+  popupModel :  Popup[];
+  project : string;
 
   constructor(private service : ProjectManagerServiceService, private dialogService:DialogService, private _router: Router) {
 
@@ -23,8 +28,10 @@ export class ViewTaskComponent implements OnInit {
   getTasks() {
     this.taskList = [];
     this.service.getTasks().subscribe((data: Task[])=>{
-      console.log(data);
+      
       this.taskList = data;
+      console.log(data);
+      this.taskOriginalList=data;
     });
   }
 
@@ -77,13 +84,45 @@ export class ViewTaskComponent implements OnInit {
   onSortTaskCompletion() {
     if(this.taskList!=undefined && this.taskList.length > 0) {
       this.taskList.sort((x1,x2)=> {
-        return 1;
+        return x1.TaskStatusId - x2.TaskStatusId;
       });
   }
 }
 
-searchProject() {
-  
+showProjects() {
+  var projects = this.service.getProjects();
+  this.popupModel = [];
+  projects.toPromise().then(project=>
+    {
+      project.forEach(x=> {
+        var model = new Popup();
+        model.Id = x.ProjectId;
+        model.Name = x.ProjectName;
+        this.popupModel.push(model);
+      });
+
+      let disposable = this.dialogService.addDialog(SearchComponent, {
+        title:'Search Project', 
+        items : this.popupModel,
+        message:'Confirm message'})
+        .subscribe((row)=>{
+            //We get dialog result
+            if(row!=undefined) {
+                 this.project = row.Name;
+                 this.taskList = this.taskOriginalList.filter((x)=> {
+                  if(x.ProjectId == undefined || x.ProjectId == null) 
+                    return false;
+                  return x.ProjectId == row.Id;
+                    
+                });
+            }
+        });
+      //We can close dialog calling disposable.unsubscribe();
+      //If dialog was not closed manually close it by timeout
+      setTimeout(()=>{
+        disposable.unsubscribe();
+      },100000);
+    });
 }
 
 }

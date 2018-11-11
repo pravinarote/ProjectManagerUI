@@ -7,6 +7,6 @@ export class Project {
     ManagerName : string;
     ManagerId : number;
     NoOfTasks : number;
-    NoOfTasksCompleted : number;
+    NoOfCompletedTasks : number;
     IsDatesEnabled : boolean; 
 }

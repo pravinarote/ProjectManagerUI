@@ -68,8 +68,8 @@
     </div>
 
     <div class="form-group row">
-        <div class="col-sm-2"></div>
-      <div class="col-sm-6">
+        <div class="col-sm-8"></div>
+      <div class="col-sm-4">
         <button type="submit" (click)="createProject(project)" class="btn btn-primary btn-space" [disabled]="angularForm.invalid || error.isError">
           {{operation}}</button>
         <button type="reset" class="btn btn-primary">Reset</button>
@@ -87,7 +87,7 @@
 
   <div class="row">
     <div class="col-sm-10">
-        <input type="text" class="form-control" id="search" placeholder="Search...">
+        <input type="text" [(ngModel)]="searchText"  class="form-control" id="search" placeholder="Search...">
     </div>
   </div>
 
@@ -105,7 +105,7 @@
     <div class="col-sm-10">
       <div class="list-group" style="margin-top: 10px;">
         
-        <div class="list-group-item" *ngFor="let project of projectList">
+        <div class="list-group-item" *ngFor="let project of (projectList|searchProject:searchText)">
           <div class="row">
             <div class="col-sm-10">
                 <div class="row">
@@ -115,7 +115,7 @@
                   </div>
                   <div class="row">
                     <div class="col-sm-5">No. of Tasks : {{project.NoOfTasks}}</div>
-                    <div class="col-sm-5">Competed : {{project.NoOfTasksCompleted}}</div>
+                    <div class="col-sm-5">Completed : {{project.NoOfCompletedTasks}}</div>
                     <div class="col-sm-2">{{project.Priority}}</div>
                   </div>
                   <div class="row">

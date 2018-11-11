@@ -12,6 +12,9 @@ import { AddProjectComponent } from './ui/add-project/add-project.component';
 import { AddUserComponent } from './ui/add-user/add-user.component';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { SearchComponent } from './ui/search/search.component';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
+import { SearchUserPipe } from './pipes/search-user.pipe';
+import { SearchProjectPipe } from './pipes/search-project.pipe';
 
 
 const appRoutes:Routes=[
@@ -29,7 +32,10 @@ const appRoutes:Routes=[
     ViewTaskComponent,
     AddProjectComponent,
     AddUserComponent,
-    SearchComponent
+    SearchComponent,
+    SearchFilterPipe,
+    SearchUserPipe,
+    SearchProjectPipe
   ],
   imports: [
     BrowserModule,FormsModule, RouterModule.forRoot(appRoutes),

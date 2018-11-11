@@ -12,4 +12,5 @@ export class Task {
     UserName : string;
     UserId : number;
     IsParentTask : boolean;
+    TaskStatusId : number;
 }

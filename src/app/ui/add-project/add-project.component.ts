@@ -25,6 +25,7 @@ export class AddProjectComponent implements OnInit {
     ProjectId : 0,
     ProjectName : ''
   };
+  searchText : string;
   operation : string;
   angularForm: FormGroup;
   projectList : Project[] = [];

@@ -15,6 +15,7 @@ export class AddUserComponent implements OnInit {
   operation : string;
   angularForm: FormGroup;
   userList : User[] = [];
+  searchText : string;
 
   constructor(private service : ProjectManagerServiceService, private _router: Router, private fb: FormBuilder) {
     this.user = new User();

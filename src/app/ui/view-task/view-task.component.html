@@ -5,8 +5,8 @@
     <table class="table borderless">
       <tr>
         <td>Project</td>
-        <td><input type="text"  class="form-control"></td>
-        <td><button (click)="searchProject()" class="btn btn-success btn-space">Search</button></td>
+        <td><input type="text" [disabled]="true" [(ngModel)]="project" class="form-control"></td>
+        <td><button (click)="showProjects()" class="btn btn-primary btn-space">Search</button></td>
       </tr>
     </table>
   </div>
@@ -31,8 +31,8 @@
       <div  class="col-sm-2 col-xs-2 col-md-2 col-lg-2">Task</div>
       <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">Parent</div>
       <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">Priority</div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">Start</div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">End</div>
+      <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">Start</div>
+      <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">End</div>
       <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"></div>
       <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"></div>
     </div>
@@ -40,8 +40,8 @@
       <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">{{task.TaskName}}</div>
       <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">{{task.ParentTaskName}}</div>
       <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">{{task.Priority}}</div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">{{task.StartDate | date : 'MM/dd/yyyy'}}</div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">{{task.EndDate | date : 'MM/dd/yyyy'}}</div>
+      <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">{{task.StartDate | date : 'MM/dd/yyyy'}}</div>
+      <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">{{task.EndDate | date : 'MM/dd/yyyy'}}</div>
       <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"><button (click)="editTask(task)" class="btn btn-primary">Edit</button></div>
       <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"><button *ngIf="task.Priority > 0 && !task.IsTaskEnded" (click)="endTask(task.TaskId)" class="btn btn-primary">End Task</button></div>
     </div>

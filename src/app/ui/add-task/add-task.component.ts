@@ -16,28 +16,27 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AddTaskComponent implements OnInit {
 
-  startDate : Date = new Date();
-  endDate : Date =new Date(this.startDate.getFullYear(),this.startDate.getMonth(),this.startDate.getDate() + 1);
-
+  
   operation : string;
   angularForm: FormGroup;
   title : string;
   error : any = { isError : false, errorMessage : ''};
   popupModel :  Popup[];
   task : Task ={
-    EndDate : this.endDate,
+    EndDate : null,
     IsTaskEnded : null,
     ParentTaskId : null,
     ParentTaskName : null,
     Priority : 0,
     ProjectId : null,
     ProjectName : null,
-    StartDate : this.startDate,
+    StartDate : null,
     TaskId : null,
     TaskName : null,
     UserId : null,
     UserName : null,
-    IsParentTask : false
+    IsParentTask : false,
+    TaskStatusId : null
   };
   
   taskList : Task[];
@@ -45,9 +44,9 @@ export class AddTaskComponent implements OnInit {
   constructor(private route: ActivatedRoute, private service : ProjectManagerServiceService, private fb: FormBuilder, private _router: Router, private dialogService:DialogService) { 
     this.createForm();
     var startdate = new Date();
-    var endDate = new Date(startdate.getFullYear(),startdate.getMonth(),startdate.getDate() + 1);
-    this.task.StartDate =startdate;
-    this.task.EndDate = endDate;
+      var endDate = new Date(startdate.getFullYear(),startdate.getMonth(),startdate.getDate() + 1);
+      this.task.StartDate =startdate;
+      this.task.EndDate = endDate;
   }
 
   ngOnInit() {
@@ -65,18 +64,20 @@ export class AddTaskComponent implements OnInit {
           this.task = data;
           this.angularForm.controls['parentTaskCheckbox'].setValue(true);
           this.angularForm.controls['parentTaskCheckbox'].disable();
-          this.parentTaskChecked(true);
+          this.parentTaskChecked(true,true);
         });
       }
       else {
         this.service.getTaskById(taskId).subscribe((data: Task)=>{
           this.task = data;
           this.angularForm.controls['parentTaskCheckbox'].setValue(false);
-          
-          this.parentTaskChecked(false);
+          this.parentTaskChecked(false,true);
           this.angularForm.controls['parentTaskCheckbox'].disable();
         });
       }
+    }
+    else{
+      
     }
   }
 
@@ -103,7 +104,7 @@ export class AddTaskComponent implements OnInit {
     });
   }
 
-  parentTaskChecked(checked : boolean) {
+  parentTaskChecked(checked : boolean,updateOperation : boolean = false) {
     if(checked) {
       this.angularForm.controls['priority'].disable();
       this.angularForm.controls['startDate'].disable();
@@ -118,10 +119,13 @@ export class AddTaskComponent implements OnInit {
       this.task.IsParentTask = true;
     }
     else {
-      var startdate = new Date();
-      var endDate = new Date(startdate.getFullYear(),startdate.getMonth(),startdate.getDate() + 1);
-      this.task.StartDate =startdate;
-      this.task.EndDate = endDate;
+      if(updateOperation == false)
+      {
+        var startdate = new Date();
+        var endDate = new Date(startdate.getFullYear(),startdate.getMonth(),startdate.getDate() + 1);
+        this.task.StartDate =startdate;
+        this.task.EndDate = endDate;
+      }
       this.task.IsParentTask = false;
       this.angularForm.controls['priority'].enable();
       this.angularForm.controls['startDate'].enable();
