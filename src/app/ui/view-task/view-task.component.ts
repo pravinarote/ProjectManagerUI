@@ -77,8 +77,13 @@ export class ViewTaskComponent implements OnInit {
   onSortTaskCompletion() {
     if(this.taskList!=undefined && this.taskList.length > 0) {
       this.taskList.sort((x1,x2)=> {
-        return x1.IsTaskEnded - x2.IsTaskEnded;
+        return 1;
       });
   }
+}
+
+searchProject() {
+  
+}
 
 }

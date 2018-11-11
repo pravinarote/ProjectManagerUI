@@ -8,7 +8,7 @@ import { User } from '../models/user';
 import { Project } from '../models/project';
 import { Task } from '../models/task';
 
-const endpoint = 'http://localhost:59969/';
+const endpoint = 'http://localhost/ProjectManager/';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':'application/json'

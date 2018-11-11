@@ -8,7 +8,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AddTaskComponent } from './ui/add-task/add-task.component';
 import { ViewTaskComponent } from './ui/view-task/view-task.component';
-import { EditTaskComponent } from './ui/edit-task/edit-task.component';
 import { AddProjectComponent } from './ui/add-project/add-project.component';
 import { AddUserComponent } from './ui/add-user/add-user.component';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
@@ -28,7 +27,6 @@ const appRoutes:Routes=[
     AppComponent,
     AddTaskComponent,
     ViewTaskComponent,
-    EditTaskComponent,
     AddProjectComponent,
     AddUserComponent,
     SearchComponent
