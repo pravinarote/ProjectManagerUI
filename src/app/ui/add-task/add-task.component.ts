@@ -142,7 +142,8 @@ export class AddTaskComponent implements OnInit {
           var model = new Popup();
           model.Id = x.ProjectId;
           model.Name = x.ProjectName;
-          this.popupModel.push(model);
+          if(x.IsSuspended == false)
+            this.popupModel.push(model);
         });
 
         let disposable = this.dialogService.addDialog(SearchComponent, {

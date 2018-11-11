@@ -125,10 +125,10 @@
             </div>
             <div class="col-sm-1">
               <div class="row">
-                <button type="submit" (click)="updateProject(project)" class="btn btn-primary" style="width: 85px;">Update</button>
+                <button type="submit" [disabled]="project.IsSuspended" (click)="updateProject(project)" class="btn btn-primary" style="width: 85px;">Update</button>
               </div>
               <div class="row" style="margin-top: 5px;">
-                  <button type="submit" class="btn btn-primary" style="width: 85px;">Suspend</button>
+                  <button type="submit" [disabled]="project.IsSuspended" (click)="suspendProject(project.ProjectId)" class="btn btn-primary" style="width: 85px;">Suspend</button>
                 </div>
             </div>
           </div>

@@ -228,11 +228,24 @@ export class ProjectManagerServiceService {
             }
         ); 
         return returnObject;
+  }
 
-
-    // this.http.delete(endpoint + "Tasks/End/" + id).subscribe(data=> {
-    //   this.serviceResponseReceived.next(true);
-    // });
+  suspendProject(id)  {
+    let returnObject = false;
+    let body = JSON.stringify(id);
+    this.http.post(endpoint + "Projects/Suspend/" + id,
+        body, httpOptions)
+        .subscribe(
+            data => {
+                console.log("End Request is successful ", data);
+                returnObject = true;
+                this.serviceResponseReceived.next(true);
+            },
+            error => {
+                console.log("POST Error", error);
+            }
+        ); 
+        return returnObject;
   }
 
 }

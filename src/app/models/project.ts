@@ -9,4 +9,5 @@ export class Project {
     NoOfTasks : number;
     NoOfCompletedTasks : number;
     IsDatesEnabled : boolean; 
+    IsSuspended : boolean;
 }

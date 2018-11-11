@@ -20,10 +20,11 @@ export class AddProjectComponent implements OnInit {
     ManagerId : 0,
     ManagerName : '',
     NoOfTasks : 0,
-    NoOfTasksCompleted : 0,
+    NoOfCompletedTasks : 0,
     Priority : 0,
     ProjectId : 0,
-    ProjectName : ''
+    ProjectName : '',
+    IsSuspended: false
   };
   searchText : string;
   operation : string;
@@ -212,7 +213,18 @@ export class AddProjectComponent implements OnInit {
   }
 
   onSortCompleted() {
+    if(this.projectList!=undefined && this.projectList.length > 0) {
+      this.projectList.sort((x1,x2)=> {
+        return x1.NoOfCompletedTasks - x2.NoOfCompletedTasks;
+      });
+    }
+  }
 
+  suspendProject(id) {
+    this.service.suspendProject(id);
+    this.service.serviceResponseReceived.subscribe((value) => {
+      this.getProjects();
+    });
   }
 
 }
