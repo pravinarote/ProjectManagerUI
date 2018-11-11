@@ -14,10 +14,10 @@
     <table class="table borderless">
       <tr>
           <td>Sort Task By:</td>
-          <td><button (click)="updateTask(taskItem.TaskId)" class="btn btn-space">Start Date</button></td>
-          <td><button (click)="updateTask(taskItem.TaskId)" class="btn btn-space">End Date</button></td>
-          <td><button (click)="updateTask(taskItem.TaskId)" class="btn btn-space">Priority</button></td>
-          <td><button (click)="updateTask(taskItem.TaskId)" class="btn btn-space">Completed</button></td>
+          <td><button (click)="onSortStartDate()" class="btn btn-space">Start Date</button></td>
+          <td><button (click)="onSortEndDate()" class="btn btn-space">End Date</button></td>
+          <td><button (click)="onSortPriority()" class="btn btn-space">Priority</button></td>
+          <td><button (click)="onSortTaskCompletion()" class="btn btn-space">Completed</button></td>
 
       </tr>
     </table>  
@@ -42,8 +42,8 @@
       <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">{{task.Priority}}</div>
       <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">{{task.StartDate | date : 'MM/dd/yyyy'}}</div>
       <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">{{task.EndDate | date : 'MM/dd/yyyy'}}</div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"><button (click)="editTask(taskItem.TaskId)" class="btn btn-primary">Edit</button></div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"><button (click)="endTask(taskItem.TaskId)" class="btn btn-primary">End Task</button></div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"><button (click)="editTask(task)" class="btn btn-primary">Edit</button></div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"><button *ngIf="task.Priority > 0 && !task.IsTaskEnded" (click)="endTask(task.TaskId)" class="btn btn-primary">End Task</button></div>
     </div>
   </div>
 

@@ -1,5 +1,5 @@
 <div class="container" style="text-align:left;">
-  <div class="page-header"><h3>Add Task</h3></div>
+  <div class="page-header"><h3>{{title}}</h3></div>
   <form [formGroup]="angularForm" novalidate>
     <div class="form-group row">
       <label for="projectName" class="col-sm-2 col-form-label">Project</label>
@@ -7,7 +7,7 @@
         <input type="text" class="form-control" [(ngModel)]="task.ProjectName" formControlName="projectName" placeholder="Project">
       </div>
       <div class="col-sm-2">
-          <button type="submit" class="btn btn-primary" [disabled]="angularForm.controls['parentTaskCheckbox'].value" (click)=showProjects()>Search</button>
+          <button type="submit" class="btn btn-primary" [disabled]="angularForm.controls['parentTaskCheckbox'].value || title!='Add Task' " (click)=showProjects()>Search</button>
       </div>
     </div>
     <div *ngIf="angularForm.controls['projectName'].invalid && (angularForm.controls['projectName'].dirty || angularForm.controls['projectName'].touched)" class="alert alert-danger">
@@ -86,7 +86,7 @@
         <input type="text" class="form-control" [(ngModel)]="task.UserName" formControlName="userName" placeholder="User">
       </div>
       <div class="col-sm-2">
-          <button type="submit" [disabled]="angularForm.controls['parentTaskCheckbox'].value" class="btn btn-primary" (click)=showUsers()>Search</button>
+          <button type="submit" [disabled]="angularForm.controls['parentTaskCheckbox'].value || title !='Add Task'" class="btn btn-primary" (click)=showUsers()>Search</button>
       </div>
     </div>
     <div *ngIf="angularForm.controls['userName'].invalid && (angularForm.controls['userName'].dirty || angularForm.controls['userName'].touched)" class="alert alert-danger">
@@ -100,7 +100,7 @@
       <div class="col-sm-2"></div>
       <div class="col-sm-3"></div>
         <div class="col-sm-4">
-          <button type="submit" (click)="manageTask(task)" class="btn btn-primary btn-space">Add Task</button>
+          <button type="submit" (click)="manageTask(task)" class="btn btn-primary btn-space">{{title}}</button>
           <button type="submit" class="btn btn-primary">Reset</button>
         </div>
     </div>

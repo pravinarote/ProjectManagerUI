@@ -20,7 +20,7 @@ const appRoutes:Routes=[
   { path:'AddTask', component:AddTaskComponent},
   { path:'AddUser', component:AddUserComponent},
   { path:'ViewTask', component:ViewTaskComponent},
-  { path:'EditTask/:id', component:EditTaskComponent},
+  { path:'EditTask/:id/:parent', component:AddTaskComponent},
 ]
 
 @NgModule({

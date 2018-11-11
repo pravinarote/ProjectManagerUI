@@ -7,6 +7,7 @@ import { User } from 'src/app/models/user';
 import { Task } from 'src/app/models/task';
 import { Popup } from 'src/app/models/popup';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-task',
@@ -15,29 +16,33 @@ import { Router } from '@angular/router';
 })
 export class AddTaskComponent implements OnInit {
 
+  startDate : Date = new Date();
+  endDate : Date =new Date(this.startDate.getFullYear(),this.startDate.getMonth(),this.startDate.getDate() + 1);
+
   operation : string;
   angularForm: FormGroup;
+  title : string;
   error : any = { isError : false, errorMessage : ''};
   popupModel :  Popup[];
   task : Task ={
-    EndDate : null,
+    EndDate : this.endDate,
     IsTaskEnded : null,
     ParentTaskId : null,
     ParentTaskName : null,
     Priority : 0,
     ProjectId : null,
     ProjectName : null,
-    StartDate : null,
+    StartDate : this.startDate,
     TaskId : null,
     TaskName : null,
     UserId : null,
     UserName : null,
     IsParentTask : false
   };
-
+  
   taskList : Task[];
 
-  constructor(private service : ProjectManagerServiceService, private fb: FormBuilder, private _router: Router, private dialogService:DialogService) { 
+  constructor(private route: ActivatedRoute, private service : ProjectManagerServiceService, private fb: FormBuilder, private _router: Router, private dialogService:DialogService) { 
     this.createForm();
     var startdate = new Date();
     var endDate = new Date(startdate.getFullYear(),startdate.getMonth(),startdate.getDate() + 1);
@@ -46,6 +51,33 @@ export class AddTaskComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.title = "Add Task";
+    var taskId = this.route.snapshot.params['id'];
+    var isParentTask =this.route.snapshot.params['parent'] as number;
+    console.log('PARENT  : ' +isParentTask);
+    
+    if(taskId != undefined && isParentTask!=undefined) {
+
+       this.title = "Update Task";
+      //Get task from service
+      if(isParentTask ==1) {
+        this.service.getParentTaskById(taskId).subscribe((data: Task)=>{
+          this.task = data;
+          this.angularForm.controls['parentTaskCheckbox'].setValue(true);
+          this.angularForm.controls['parentTaskCheckbox'].disable();
+          this.parentTaskChecked(true);
+        });
+      }
+      else {
+        this.service.getTaskById(taskId).subscribe((data: Task)=>{
+          this.task = data;
+          this.angularForm.controls['parentTaskCheckbox'].setValue(false);
+          
+          this.parentTaskChecked(false);
+          this.angularForm.controls['parentTaskCheckbox'].disable();
+        });
+      }
+    }
   }
 
   compareTwoDates() {
@@ -192,11 +224,21 @@ export class AddTaskComponent implements OnInit {
   }
 
   manageTask(task : Task) {
-    if(task.IsParentTask) {
-      this.service.createParentTask(task);
+    if(this.title == "Add Task") {
+      if(task.IsParentTask) {
+        this.service.createParentTask(task);
+      }
+      else {
+        this.service.createTask(task);
+      }
     }
     else {
-      this.service.createTask(task);
+      if(task.IsParentTask) {
+        this.service.updateParentTask(task);
+      }
+      else {
+        this.service.updateTask(task);
+      }
     }
 
     this.service.serviceResponseReceived.subscribe((value) => {

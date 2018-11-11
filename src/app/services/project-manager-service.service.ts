@@ -117,6 +117,44 @@ export class ProjectManagerServiceService {
     return returnObject;
   }
 
+  updateParentTask(task : Task)  {
+    let body = JSON.stringify(task);
+
+    let returnObject = false;
+    this.http.put(endpoint + "ParentTasks/Update",
+        body, httpOptions)
+        .subscribe(
+            data => {
+                console.log("PUT Request is successful ", data);
+                returnObject = true;
+                this.serviceResponseReceived.next(true);
+            },
+            error => {
+                console.log("Error", error);
+            }
+        ); 
+    return returnObject;
+  }
+
+  updateTask(task : Task)  {
+    let body = JSON.stringify(task);
+
+    let returnObject = false;
+    this.http.put(endpoint + "Tasks/Update",
+        body, httpOptions)
+        .subscribe(
+            data => {
+                console.log("PUT Request is successful ", data);
+                returnObject = true;
+                this.serviceResponseReceived.next(true);
+            },
+            error => {
+                console.log("Error", error);
+            }
+        ); 
+    return returnObject;
+  }
+
   updateUser(task : User)  {
     let body = JSON.stringify(task);
 
@@ -159,11 +197,42 @@ export class ProjectManagerServiceService {
     return this.http.get<User>(endpoint + 'Users/GetById/' + id);
   }
 
+  getTaskById(id) : Observable<Task> {
+    return this.http.get<Task>(endpoint + 'Tasks/GetById/' + id);
+  }
+
+  getParentTaskById(id) : Observable<Task> {
+    return this.http.get<Task>(endpoint + 'ParentTasks/GetById/' + id);
+  }
+
   deleteUser(id)  {
     
     this.http.delete(endpoint + "Users/Delete/" + id).subscribe(data=> {
       this.serviceResponseReceived.next(true);
     });
+  }
+
+  endTask(id)  {
+    let returnObject = false;
+    let body = JSON.stringify(id);
+    this.http.post(endpoint + "Tasks/End/" + id,
+        body, httpOptions)
+        .subscribe(
+            data => {
+                console.log("End Request is successful ", data);
+                returnObject = true;
+                this.serviceResponseReceived.next(true);
+            },
+            error => {
+                console.log("POST Error", error);
+            }
+        ); 
+        return returnObject;
+
+
+    // this.http.delete(endpoint + "Tasks/End/" + id).subscribe(data=> {
+    //   this.serviceResponseReceived.next(true);
+    // });
   }
 
 }
