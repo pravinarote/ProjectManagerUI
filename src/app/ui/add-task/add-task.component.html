@@ -3,7 +3,7 @@
   <form [formGroup]="angularForm" novalidate>
     <div class="form-group row">
       <label for="projectName" class="col-sm-2 col-form-label">Project</label>
-      <div class="col-sm-4">
+      <div class="col-sm-6">
         <input type="text" class="form-control" [(ngModel)]="task.ProjectName" formControlName="projectName" placeholder="Project">
       </div>
       <div class="col-sm-2">
@@ -18,7 +18,7 @@
 
     <div class="form-group row">
       <label for="taskName" class="col-sm-2 col-form-label">Task</label>
-      <div class="col-sm-5">
+      <div class="col-sm-7">
         <input type="text" class="form-control" [(ngModel)]="task.TaskName" formControlName="taskName" placeholder="Task">
       </div>
     </div>
@@ -30,7 +30,7 @@
 
     <div class="form-group row">
       <div class="col-sm-2"></div>
-      <div class="col-sm-4">
+      <div class="col-sm-6">
         <div class="form-check">
           <input class="form-check-input" type="checkbox" formControlName="parentTaskCheckbox" (change)="parentTaskChecked(angularForm.controls['parentTaskCheckbox'].value)">
           <label class="form-check-label" style="font-weight: normal" for="parentTaskCheckbox">
@@ -42,14 +42,14 @@
 
     <div class="form-group row">
       <label for="priority" class="col-sm-2 col-form-label">Priority</label>
-      <div class="col-sm-5">
-        <input type="range" class="form-control" [(ngModel)]="task.Priority" formControlName="priority" placeholder="Project">
+      <div class="col-sm-7">
+        <input type="range" min="0" max="10" step="1" value="0" class="form-control" [(ngModel)]="task.Priority" formControlName="priority" placeholder="Project">
       </div>
     </div>
 
     <div class="form-group row">
       <label for="parentTask" class="col-sm-2 col-form-label">Parent Task</label>
-      <div class="col-sm-4">
+      <div class="col-sm-6">
         <input type="text" class="form-control" [(ngModel)]="task.ParentTaskName" formControlName="parentTask" placeholder="Parent Task">
       </div>
       <div class="col-sm-2">
@@ -59,12 +59,12 @@
 
     <div class="form-group row">
       <label for="manager" class="col-sm-2 col-form-label">Start Date</label>
-      <div class="col-sm-2">
+      <div class="col-sm-3">
         <input type="date" [ngModel]="task.StartDate | date:'yyyy-MM-dd'"  (ngModelChange)="task.StartDate = $event"
         [value]="task.StartDate | date:'yyyy-MM-dd'"  class="form-control" formControlName="startDate">
       </div>
       <label for="manager" class="col-sm-1 col-form-label">End Date</label>
-      <div class="col-sm-2">
+      <div class="col-sm-3">
         <input type="date" [ngModel]="task.EndDate | date:'yyyy-MM-dd'"  (ngModelChange)="task.EndDate = $event" (blur)="compareTwoDates()"
         [value]="task.EndDate | date:'yyyy-MM-dd'"  class="form-control" formControlName="endDate" class="form-control" formControlName="endDate" >
       </div>
@@ -82,7 +82,7 @@
 
     <div class="form-group row">
       <label for="userName" class="col-sm-2 col-form-label">User</label>
-      <div class="col-sm-4">
+      <div class="col-sm-6">
         <input type="text" class="form-control" [(ngModel)]="task.UserName" formControlName="userName" placeholder="User">
       </div>
       <div class="col-sm-2">
@@ -98,7 +98,7 @@
     <div class="form-group row">
       <div class="col-sm-2"></div>
       <div class="col-sm-2"></div>
-      <div class="col-sm-1"></div>
+      <div class="col-sm-3"></div>
         <div class="col-sm-4">
           <button type="submit" (click)="manageTask(task)" class="btn btn-primary btn-space">Add Task</button>
           <button type="submit" class="btn btn-primary">Reset</button>
