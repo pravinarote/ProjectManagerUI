@@ -37,6 +37,48 @@ export class ProjectManagerServiceService {
     return this.http.get<Task[]>(endpoint + 'ParentTasks/GetAll');
   }
 
+  getTasks(): Observable<Task[]>  {
+    return this.http.get<Task[]>(endpoint + 'Tasks/GetAll');
+  }
+
+  createTask(task : Task) {
+    let body = JSON.stringify(task);
+    console.log(body);
+    let returnObject = false;
+    this.http.post(endpoint + "Tasks/Create",
+        body, httpOptions)
+        .subscribe(
+            data => {
+                console.log("POST Request is successful ", data);
+                returnObject = true;
+                this.serviceResponseReceived.next(true);
+            },
+            error => {
+                console.log("POST Error", error);
+            }
+        ); 
+    return returnObject;
+  }
+
+  createParentTask(task : Task) {
+    let body = JSON.stringify(task);
+    console.log(body);
+    let returnObject = false;
+    this.http.post(endpoint + "ParentTasks/Create",
+        body, httpOptions)
+        .subscribe(
+            data => {
+                console.log("POST Request is successful ", data);
+                returnObject = true;
+                this.serviceResponseReceived.next(true);
+            },
+            error => {
+                console.log("POST Error", error);
+            }
+        ); 
+    return returnObject;
+  }
+
   createUser(task : User) {
     let body = JSON.stringify(task);
     console.log(body);

@@ -6,6 +6,7 @@ import { ProjectManagerServiceService } from 'src/app/services/project-manager-s
 import { User } from 'src/app/models/user';
 import { Task } from 'src/app/models/task';
 import { Popup } from 'src/app/models/popup';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-task',
@@ -30,10 +31,13 @@ export class AddTaskComponent implements OnInit {
     TaskId : null,
     TaskName : null,
     UserId : null,
-    UserName : null
+    UserName : null,
+    IsParentTask : false
   };
 
-  constructor(private service : ProjectManagerServiceService, private fb: FormBuilder, private dialogService:DialogService) { 
+  taskList : Task[];
+
+  constructor(private service : ProjectManagerServiceService, private fb: FormBuilder, private _router: Router, private dialogService:DialogService) { 
     this.createForm();
     var startdate = new Date();
     var endDate = new Date(startdate.getFullYear(),startdate.getMonth(),startdate.getDate() + 1);
@@ -79,12 +83,14 @@ export class AddTaskComponent implements OnInit {
       this.task.UserName=null;
       this.task.UserId=null;
       this.task.ProjectId=null;
+      this.task.IsParentTask = true;
     }
     else {
       var startdate = new Date();
       var endDate = new Date(startdate.getFullYear(),startdate.getMonth(),startdate.getDate() + 1);
       this.task.StartDate =startdate;
       this.task.EndDate = endDate;
+      this.task.IsParentTask = false;
       this.angularForm.controls['priority'].enable();
       this.angularForm.controls['startDate'].enable();
       this.angularForm.controls['endDate'].enable();
@@ -141,8 +147,8 @@ export class AddTaskComponent implements OnInit {
           .subscribe((row)=>{
               //We get dialog result
               if(row!=undefined) {
-                  this.task.ProjectId = row.Id;
-                  this.task.ProjectName = row.Name;
+                  this.task.ParentTaskId = row.Id;
+                  this.task.ParentTaskName = row.Name;
               }
           });
         //We can close dialog calling disposable.unsubscribe();
@@ -184,6 +190,22 @@ export class AddTaskComponent implements OnInit {
       });
 
   }
+
+  manageTask(task : Task) {
+    if(task.IsParentTask) {
+      this.service.createParentTask(task);
+    }
+    else {
+      this.service.createTask(task);
+    }
+
+    this.service.serviceResponseReceived.subscribe((value) => {
+      this._router.navigateByUrl('/ViewTask');
+    });
+
+  }
+
+  
 
 
 

@@ -26,30 +26,24 @@
 
 <div class="container inner-container list-group">
   <hr/>
-  <div class="list-group-item">
+  <div class="list-group-item" *ngFor="let task of taskList">
     <div class="row font-bold">
-      <div  class="col-sm-2 col-xs-2 col-md-2 col-lg-2">.col-sm-4</div>
-      <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">.col-sm-4</div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
+      <div  class="col-sm-2 col-xs-2 col-md-2 col-lg-2">Task</div>
+      <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">Parent</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">Priority</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">Start</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">End</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"></div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"></div>
     </div>
     <div class="row">
-      <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">.col-sm-4</div>
-      <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">.col-sm-4</div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
-      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">.col-sm-4</div>
+      <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">{{task.TaskName}}</div>
+      <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2">{{task.ParentTaskName}}</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">{{task.Priority}}</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">{{task.StartDate | date : 'MM/dd/yyyy'}}</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1">{{task.EndDate | date : 'MM/dd/yyyy'}}</div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"><button (click)="editTask(taskItem.TaskId)" class="btn btn-primary">Edit</button></div>
+      <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"><button (click)="endTask(taskItem.TaskId)" class="btn btn-primary">End Task</button></div>
     </div>
   </div>
 
