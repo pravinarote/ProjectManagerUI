@@ -21,6 +21,7 @@ export class AddTaskComponent implements OnInit {
   angularForm: FormGroup;
   title : string;
   error : any = { isError : false, errorMessage : ''};
+  projectNameError : any = { isError : false, errorMessage : ''};
   popupModel :  Popup[];
   task : Task ={
     EndDate : null,
@@ -77,7 +78,7 @@ export class AddTaskComponent implements OnInit {
       }
     }
     else{
-      
+      this.parentTaskChecked(false);
     }
   }
 
@@ -109,6 +110,8 @@ export class AddTaskComponent implements OnInit {
       this.angularForm.controls['priority'].disable();
       this.angularForm.controls['startDate'].disable();
       this.angularForm.controls['endDate'].disable();
+      this.angularForm.controls['startDate'].setValidators(null);
+      this.angularForm.controls['endDate'].setValidators(null);
       this.task.ProjectName = '';
       this.task.Priority=0;
       this.task.StartDate =null;
@@ -130,6 +133,8 @@ export class AddTaskComponent implements OnInit {
       this.angularForm.controls['priority'].enable();
       this.angularForm.controls['startDate'].enable();
       this.angularForm.controls['endDate'].enable();
+      this.angularForm.controls['startDate'].setValidators(Validators.required);
+      this.angularForm.controls['endDate'].setValidators(Validators.required);
     }
   }
 
@@ -155,6 +160,7 @@ export class AddTaskComponent implements OnInit {
               if(row!=undefined) {
                   this.task.ProjectId = row.Id;
                   this.task.ProjectName = row.Name;
+                  this.angularForm.controls['projectName'].markAsTouched();
               }
           });
         //We can close dialog calling disposable.unsubscribe();
@@ -229,6 +235,14 @@ export class AddTaskComponent implements OnInit {
   }
 
   manageTask(task : Task) {
+    var projectNameEntered = this.angularForm.controls['projectName'].value;
+    if(task.IsParentTask == false)
+    if(projectNameEntered == undefined || projectNameEntered == '' || projectNameEntered == null) {
+      this.projectNameError={isError:true,errorMessage:'Please select project.'};
+      return;
+    }
+    if(this.angularForm.valid == false) return;
+
     if(this.title == "Add Task") {
       if(task.IsParentTask) {
         this.service.createParentTask(task);
