@@ -49,6 +49,9 @@
         <input type="range" min="0" max="10" step="1" value="0" class="form-control" [(ngModel)]="task.Priority" formControlName="priority" placeholder="Project">
       </div>
     </div>
+    <div *ngIf="priorityError.isError" class="alert alert-danger">
+      {{ priorityError.errorMessage }}
+    </div>
 
     <div class="form-group row">
       <label for="parentTask" class="col-sm-2 col-form-label">Parent Task</label>
@@ -100,14 +103,18 @@
         User Name is required.
       </div>
     </div>
+    <div *ngIf="userError.isError" class="alert alert-danger">
+      {{ userError.errorMessage }}
+    </div>
 
     <div class="form-group row">
       <div class="col-sm-2"></div>
       <div class="col-sm-2"></div>
       <div class="col-sm-3"></div>
         <div class="col-sm-4">
-          <button type="submit" [disabled]="angularForm.invalid || error.isError || projectNameError.isError" (click)="manageTask(task)" class="btn btn-primary btn-space">{{title}}</button>
+          <button type="submit" [disabled]="angularForm.invalid || error.isError" (click)="manageTask(task)" class="btn btn-primary btn-space">{{title}}</button>
           <button type="submit" class="btn btn-primary">Reset</button>
+          
         </div>
     </div>
   </form>

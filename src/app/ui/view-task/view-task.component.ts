@@ -89,6 +89,19 @@ export class ViewTaskComponent implements OnInit {
   }
 }
 
+deleteTask(task: Task) {
+  if((task.StartDate == null || task.StartDate == undefined) && (task.EndDate == null || task.EndDate == undefined)) {
+    this.service.deleteParentTask(task.TaskId);
+  }
+  else {
+    this.service.deleteTask(task.TaskId);
+  }
+
+  this.service.serviceResponseReceived.subscribe((value) => {
+    this.getTasks();
+  });
+}
+
 showProjects() {
   var projects = this.service.getProjects();
   this.popupModel = [];

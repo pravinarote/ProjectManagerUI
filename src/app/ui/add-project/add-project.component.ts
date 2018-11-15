@@ -5,6 +5,7 @@ import { Project } from 'src/app/models/project';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { SearchComponent } from '../search/search.component';
 import { Popup } from 'src/app/models/popup';
+import { retry } from 'rxjs/internal/operators/retry';
 
 @Component({
   selector: 'app-add-project',
@@ -30,6 +31,8 @@ export class AddProjectComponent implements OnInit {
   operation : string;
   angularForm: FormGroup;
   projectList : Project[] = [];
+  priorityError : any = { isError : false, errorMessage : ''};
+  managerError  : any =  { isError : false, errorMessage : ''};
   constructor(private service : ProjectManagerServiceService, private fb: FormBuilder, private dialogService:DialogService) {
     this.createForm();
    }
@@ -104,7 +107,22 @@ export class AddProjectComponent implements OnInit {
 
   }
 
+  
   createProject(project : Project) {
+
+    this.priorityError  = { isError : false, errorMessage : ''};
+    this.managerError= { isError : false, errorMessage : ''};
+
+    if(project.Priority == 0) {
+      this.priorityError={isError:true,errorMessage:'Please select priority between 0 to 10.'};
+      return;
+    }
+
+    if(project.ManagerId == undefined || project.ManagerId == null || project.ManagerId ==0) {
+      this.managerError = {isError:true,errorMessage:'Please select project manager.'};
+      return;
+    }
+
     if(project.ProjectId > 0) {
       this.service.updateProject(project);
     }

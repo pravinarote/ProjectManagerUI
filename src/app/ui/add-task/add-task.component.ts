@@ -22,6 +22,8 @@ export class AddTaskComponent implements OnInit {
   title : string;
   error : any = { isError : false, errorMessage : ''};
   projectNameError : any = { isError : false, errorMessage : ''};
+  priorityError : any = { isError : false, errorMessage : ''};
+  userError : any = { isError : false, errorMessage : ''};
   popupModel :  Popup[];
   task : Task ={
     EndDate : null,
@@ -234,14 +236,31 @@ export class AddTaskComponent implements OnInit {
 
   }
 
+  
+
   manageTask(task : Task) {
+    this.projectNameError  = { isError : false, errorMessage : ''};
+    this.priorityError  = { isError : false, errorMessage : ''};
+
     var projectNameEntered = this.angularForm.controls['projectName'].value;
-    if(task.IsParentTask == false)
+    if(task.IsParentTask == false) {
     if(projectNameEntered == undefined || projectNameEntered == '' || projectNameEntered == null) {
       this.projectNameError={isError:true,errorMessage:'Please select project.'};
       return;
     }
-    if(this.angularForm.valid == false) return;
+
+    if(task.Priority == 0) {
+      this.priorityError={isError:true,errorMessage:'Please select priority between 0 to 10.'};
+      return;
+    }
+
+    if(task.UserId == undefined || task.UserId == null) {
+      this.userError={isError:true,errorMessage:'Please select task owner.'};
+      return;
+    }
+
+  }
+    
 
     if(this.title == "Add Task") {
       if(task.IsParentTask) {

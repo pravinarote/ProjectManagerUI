@@ -56,6 +56,9 @@
           <input type="range" [(ngModel)]="project.Priority" class="form-control" min="0" max="10" step="1" value="0" formControlName="priority" placeholder="Project">
         </div>
     </div>
+    <div *ngIf="priorityError.isError" class="alert alert-danger">
+      {{ priorityError.errorMessage }}
+    </div>
 
     <div class="form-group row">
         <label for="manager" class="col-sm-2 col-form-label">Manager</label>
@@ -65,6 +68,9 @@
         <div class="col-sm-2">
             <button type="submit" class="btn btn-primary" (click)="showPopup()">Search</button>
         </div>
+    </div>
+    <div *ngIf="managerError.isError" class="alert alert-danger">
+      {{ managerError.errorMessage }}
     </div>
 
     <div class="form-group row">

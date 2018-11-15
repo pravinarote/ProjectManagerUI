@@ -212,6 +212,24 @@ export class ProjectManagerServiceService {
     });
   }
 
+  deleteTask(id)  {
+    this.http.delete(endpoint + "Tasks/Delete/" + id).subscribe(data=> {
+      this.serviceResponseReceived.next(true);
+    });
+  }
+
+  deleteProject(id)  {
+    this.http.delete(endpoint + "Projects/Delete/" + id).subscribe(data=> {
+      this.serviceResponseReceived.next(true);
+    });
+  }
+
+  deleteParentTask(id)  {
+    this.http.delete(endpoint + "ParentTasks/Delete/" + id).subscribe(data=> {
+      this.serviceResponseReceived.next(true);
+    });
+  }
+
   endTask(id)  {
     let returnObject = false;
     let body = JSON.stringify(id);
